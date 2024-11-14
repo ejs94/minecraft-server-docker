@@ -1,2 +1,3 @@
-./unmined
-./bedrock_server
+unmined
+bedrock_server
+backups-config/.service_is_healthy
