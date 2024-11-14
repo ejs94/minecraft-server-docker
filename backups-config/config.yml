@@ -1,0 +1,24 @@
+containers:
+  bedrock:
+    # Backup the world "Moaiworld" on the "minecraft" docker container
+    - name: minecraft
+      # Tells the backup service that this container is accessible
+      # using the mc-server-runner SSH functionality.
+      # passwordFile should point to the .remote-console.yaml file in the container
+      ssh: minecraft:2222
+      passwordFile: /bedrock_server/.remote-console.yaml
+      worlds:
+        - /bedrock_server/worlds/Luizalandia
+schedule:
+  # This will perform a backup every 4 hours.
+  # At most this will generate 8 backups a day.
+  interval: 6h
+  startupDelay: 1m
+trim:
+  # Keep all backups for the last two days (today and yesterday)
+  # Keep at least one backup for the last 14 days
+  # Keep at least two backups per world
+  trimDays: 2
+  keepDays: 14
+  minKeep: 2
+backupPath: "/backups"
